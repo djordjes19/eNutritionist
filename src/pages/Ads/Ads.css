@@ -1,0 +1,21 @@
+#ads .input-group,
+#ads .dropdown {
+  width: auto;
+}
+
+#ads .input-group input {
+  border-left: none;
+  padding-left: 0px;
+  font-family: poppins;
+}
+
+#ads .input-group input:focus {
+  border-color: #e3e3e3;
+  font-family: poppins;
+}
+
+#ads .input-group span {
+  border-right: none;
+  background-color: transparent;
+  font-family: poppins;
+}

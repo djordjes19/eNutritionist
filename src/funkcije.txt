@@ -1,0 +1,96 @@
+const deleteAd = async () => {
+    const ref = doc(db, "ads", adData.id);
+    await deleteDoc(ref);
+    reload(adData.id);
+  };
+
+const signIn = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/ads");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+const createUser = async () => {
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        userData.email,
+        password
+      );
+
+      await setDoc(doc(db, "users", response.user.uid), {
+        name: userData.ime + " " + userData.prezime,
+        phoneNumber: userData.brtel,
+        city: userData.grad,
+        dateOfBirth: userData.datumrodjenja,
+      });
+      navigate("/ads");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+const getCities = async () => {
+      await axios
+        .post(`https://countriesnow.space/api/v0.1/countries/cities`, {
+          country: "serbia",
+        })
+        .then((e) => setGradovi(e.data.data));
+    };
+
+signOut(auth)
+
+const getUserData = async () => {
+      try {
+        const userData = (
+          await getDoc(doc(db, "users", auth.currentUser.uid))
+        ).data();
+
+        setUserData(userData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+const getAds = async () => {
+    try {
+        const data = await getDocs(adCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setOglasi(filteredData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+const postAd = async () => {
+    try {
+      await addDoc(collection(db, "ads"), adData);
+      navigate("/ads");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+const updateUserEmail = async () => {
+    let pass = prompt("Unesite vašu lozinku");
+    await signInWithEmailAndPassword(userData.email, pass).then(
+      updateEmail(auth.currentUser, userData.email)
+    );
+    reload(!reloadData);
+  };
+
+  const updateProfile = async () => {
+    const ref = doc(db, "users", auth.currentUser.uid);
+    await updateDoc(ref, {
+      city: userData.grad,
+      dateOfBirth: userData.datumrodjenja,
+      name: userData.ime + " " + userData.prezime,
+      phoneNumber: userData.brtel,
+    });
+  };
