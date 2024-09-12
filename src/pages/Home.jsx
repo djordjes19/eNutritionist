@@ -14,7 +14,7 @@ function Home() {
                 Welcome to first online nutritionist website! We provide
                 personalized meal plans for a healthier life.
               </h4>
-              <h1 className="mb-3">Health is wealth </h1>
+              <h1 className="mb-3">Health is Wealth </h1>
               <p>
                 "Our website offers a wide range of services, such as creating
                 nutrition plans for various needs, online consultations with
@@ -23,7 +23,7 @@ function Home() {
                 users online."
               </p>
               <Link className="btn btn-success" to={"/ads"}>
-                Choose a Nutricionist
+                Choose your Nutricionist
                 <BsArrowRight className="ms-2" />
               </Link>
             </div>
