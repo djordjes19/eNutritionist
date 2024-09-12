@@ -23,7 +23,7 @@ function Home() {
                 users online."
               </p>
               <Link className="btn btn-success" to={"/ads"}>
-                Choose a nutricionist
+                Choose a Nutricionist
                 <BsArrowRight className="ms-2" />
               </Link>
             </div>
